@@ -1,10 +1,20 @@
 package com.hzukhruf.genbe.model.dto;
 
 public class DataDto3 {
+	private Integer idPendidikan;
 	private String jenjang;
 	private String institusi;
 	private String masuk;
 	private String lulus;
+
+	
+	public Integer getIdPendidikan() {
+		return idPendidikan;
+	}
+
+	public void setIdPendidikan(Integer idPendidikan) {
+		this.idPendidikan = idPendidikan;
+	}
 
 	public String getJenjang() {
 		return jenjang;

@@ -10,7 +10,7 @@ public class Person {
 	@Column(name = "id_person")
 	private Integer idPerson;
 
-	@Column(name = "nik", length = 16, nullable = false)
+	@Column(name = "nik", length = 16, nullable = false,unique = true)
 	private String nik;
 
 	@Column(name = "nama", length = 50)

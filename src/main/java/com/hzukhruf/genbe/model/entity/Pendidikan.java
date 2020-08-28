@@ -12,7 +12,7 @@ public class Pendidikan {
 	private Integer idPendidikan;
 	
 	@ManyToOne
-	@JoinColumn(name="id_person")
+	@JoinColumn(name="id_person",nullable = false)
 	private Person person;
 	
 	@Column(name="jenjang", nullable = false, length = 10)
@@ -74,6 +74,4 @@ public class Pendidikan {
 	public void setTahunLulus(String tahunLulus) {
 		this.tahunLulus = tahunLulus;
 	}
-	
-	
 }

@@ -22,7 +22,7 @@ public class Biodata {
 	private String tempatLahir;
 	
 	@OneToOne
-	@JoinColumn(name="id_person")
+	@JoinColumn(name="id_person",unique = true,nullable = false)
 	private Person person;
 
 	public Integer getIdBio() {
