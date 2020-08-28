@@ -86,6 +86,8 @@ public class Controller {
 		biodata.setNoHp(data.getHp());
 		biodata.setTanggalLahir(bYear);
 		biodata.setTempatLahir(data.getTempatLahir());
+		
+		if 
 		return biodata;
 	}
 
