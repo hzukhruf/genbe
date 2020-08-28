@@ -1,5 +1,7 @@
 package com.hzukhruf.genbe.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hzukhruf.genbe.model.dto.DataDto1;
 import com.hzukhruf.genbe.model.dto.DataDto2;
 import com.hzukhruf.genbe.model.dto.DataDto3;
+import com.hzukhruf.genbe.model.dto.Status2;
 import com.hzukhruf.genbe.model.dto.StatusDto;
 import com.hzukhruf.genbe.model.entity.Biodata;
 import com.hzukhruf.genbe.model.entity.Pendidikan;
@@ -121,17 +124,45 @@ public class Controller {
 		}
 		return statusDto;
 	}
-
+	
+	// Get mapping  by nik
 	@GetMapping("/{nik}")
 	public List<Object> getByNik(@PathVariable String nik) {
 		List<Object> values = new ArrayList<>();
 		StatusDto statusDto = new StatusDto();
 		DataDto2 dataDto2 = new DataDto2();
+		Status2 status2 = new Status2();
 		if (nik.length() == 16) {
 			if (personRepository.findByNik(nik).isEmpty() == false) {
-				statusDto.setStatus(true);
-				statusDto.setMessage("true");
-				values.add(statusDto);
+				Person person = personRepository.findByNik(nik).get(0);
+				Integer id = person.getIdPerson();
+				Biodata biodata = biodataRepository.findAllByPersonIdPerson(id);
+				dataDto2.setNik(nik);
+				dataDto2.setName(person.getNama());
+				dataDto2.setAddress(person.getAlamat());
+				dataDto2.setHp(biodata.getNoHp());
+
+				// convert date to String
+				DateFormat format = new SimpleDateFormat("dd-MMMMMMMMM-yyyy");
+				String date = format.format(biodata.getTanggalLahir());
+				dataDto2.setTgl(date);
+				dataDto2.setTempatLahir(biodata.getTempatLahir());
+
+				// set Umur
+				LocalDate birthYear = biodata.getTanggalLahir().toInstant().atZone(ZoneId.systemDefault())
+						.toLocalDate();
+				LocalDate dateNow = LocalDate.now();
+				Period p = Period.between(birthYear, dateNow);
+				int umur = p.getYears();
+
+				dataDto2.setUmur(umur);
+				dataDto2.setPendidikanTerakhir(pendidikanRepository.cariPendidikanTerakhir(id));
+
+				// set status message
+				status2.setStatus(true);
+				status2.setMessage("success");
+				status2.setData(dataDto2);
+				values.add(status2);
 			} else {
 				statusDto.setStatus(true);
 				statusDto.setMessage("data dengan nik " + nik + " tidak ditemukan");

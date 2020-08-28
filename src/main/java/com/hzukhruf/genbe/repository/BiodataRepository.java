@@ -7,5 +7,5 @@ import com.hzukhruf.genbe.model.entity.Biodata;
 
 @Repository
 public interface BiodataRepository extends JpaRepository<Biodata, Integer>{
-
+	Biodata findAllByPersonIdPerson(Integer idPerson);
 }
