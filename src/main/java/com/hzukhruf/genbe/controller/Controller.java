@@ -54,6 +54,7 @@ public class Controller {
 	}
 
 	// insert data person
+	// Insert Tanggal dengan format dd-Month-yyyy (Month full name in english)
 	@PostMapping
 	public StatusDto insert(@RequestBody DataDto1 data) {
 		StatusDto statusDto = new StatusDto();
