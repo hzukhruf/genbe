@@ -14,7 +14,7 @@ public class Biodata {
 	
 	@Column(name="nohp",length = 16)
 	private String noHp;
-	
+			
 	@Column(name="tanggal_lahir", nullable = false)
 	private Date tanggalLahir;
 	
