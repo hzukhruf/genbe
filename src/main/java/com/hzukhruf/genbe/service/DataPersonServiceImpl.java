@@ -25,25 +25,34 @@ public class DataPersonServiceImpl implements DataPersonService {
 
 	@Override
 	public DataDto1 insertData(DataDto1 data) {
+		Person person = convertToEntityPerson(data);
+		personRepository.save(person);
+		data.setIdPerson(person.getIdPerson());
+		Biodata biodata = convertToEntityBiodata(data);
+		biodata.setPerson(person);
+		biodataRepository.save(biodata);
+		return data;
+	}
+	
+	private Person convertToEntityPerson(DataDto1 data){
 		Person person = new Person();
 		person.setNik(data.getNik());
 		person.setNama(data.getName());
 		person.setAlamat(data.getAddress());
-		personRepository.save(person);
-		data.setIdPerson(person.getIdPerson());
-
+		return person;
+	}
+	
+	private Biodata convertToEntityBiodata(DataDto1 data) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy");
 		LocalDate birthYear = LocalDate.parse(data.getTgl(), formatter);
 		Date bYear = Date.from(birthYear.atStartOfDay(ZoneId.systemDefault()).toInstant());
 		Biodata biodata = new Biodata();
-		biodata.setPerson(person);
 		biodata.setIdBio(data.getIdBio());
 		biodata.setNoHp(data.getHp());
 		biodata.setTanggalLahir(bYear);
 		biodata.setTempatLahir(data.getTempatLahir());
-		biodataRepository.save(biodata);
-		
-		return data;
+		return biodata;
 	}
+	
 
 }
