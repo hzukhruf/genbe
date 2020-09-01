@@ -3,6 +3,8 @@ package com.hzukhruf.genbe.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hzukhruf.genbe.model.dto.DataDto3;
 import com.hzukhruf.genbe.model.entity.Pendidikan;
@@ -10,10 +12,12 @@ import com.hzukhruf.genbe.model.entity.Person;
 import com.hzukhruf.genbe.repository.PendidikanRepository;
 import com.hzukhruf.genbe.repository.PersonRepository;
 
-public class DataPendidikanServiceImpl implements DataPendidikanService{
+@Service
+@Transactional
+public class DataPendidikanServiceImpl implements DataPendidikanService {
 	@Autowired
 	private PersonRepository personRepository;
-	@Autowired 
+	@Autowired
 	private PendidikanRepository pendidikanRepository;
 
 	@Override
@@ -24,7 +28,7 @@ public class DataPendidikanServiceImpl implements DataPendidikanService{
 		});
 		return dataList;
 	}
-	
+
 	private Pendidikan convertToEntityPendidikan(Integer idPerson, DataDto3 data) {
 		Pendidikan pendidikan = new Pendidikan();
 		pendidikan.setIdPendidikan(data.getIdPendidikan());
@@ -38,6 +42,5 @@ public class DataPendidikanServiceImpl implements DataPendidikanService{
 		}
 		return pendidikan;
 	}
-	
 
 }

@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name="t_biodata")
 public class Biodata {
@@ -14,7 +15,7 @@ public class Biodata {
 	
 	@Column(name="nohp",length = 16)
 	private String noHp;
-			
+	
 	@Column(name="tanggal_lahir", nullable = false)
 	private Date tanggalLahir;
 	
