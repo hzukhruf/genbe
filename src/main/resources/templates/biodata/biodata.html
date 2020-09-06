@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html layout:decorate="~{base}" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div class="row mb-2" layout:fragment="content-header">
+    <div class="col-sm-6">
+        <h1>Biodata</h1>
+    </div>
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item active">Biodata</li>
+        </ol>
+    </div>
+</div>
+
+<div class="card card-olive" layout:fragment="content-body">
+    <div class="card-header">
+        <h2 class="card-title">Biodata</h2>
+    </div>
+    <br>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form role="form" id=form>
+        <!-- data diri -->
+        <div class="container-fluid">
+            <div class="card card-outline card-olive">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <i class="fas fa-user-edit"></i>
+                        Data Diri
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="nik">NIK</label>
+                        <input type="text" class="form-control" id="nik" name="nik" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama">Nama</label>
+                        <input type="text" class="form-control" id="nama" name="nama" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="alamat">Alamat</label>
+                        <textarea type="text" rows="3" class="form-control" id="alamat" name="alamat"
+                            required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="noHp">No HP</label>
+                        <input type="text" class="form-control" id="noHp" name="noHp" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tanggalLahir">Tanggal Lahir</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="tanggalLahir" name="tanggalLahir" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tempatLahir">Tempat Lahir</label>
+                        <input type="text" class="form-control" id="tempatLahir" name="tempatLahir" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Riwayat Pendidikan -->
+        <div class="container-fluid">
+            <div class="card card-outline card-olive">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <i class="fas fa-user-graduate"></i>
+                        Riwayat Pendidikan
+                    </h4>
+                </div>
+                <div class="multi-field-wrapper">
+                    <div class="container-fluid">
+                        <div class="multi-fields">
+                            <div class="multi-field">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label align="center">Jenjang</label>
+                                                <select class="form-control select2" style="width: 100%;" id='jenjang'
+                                                    name="jenjang" required>
+                                                    <option value="">Pilih salah satu</option>
+                                                    <option value="SD">SD</option>
+                                                    <option value="SMP">SMP</option>
+                                                    <option value="SMA">SMA</option>
+                                                    <option value="SMK">SMK</option>
+                                                    <option value="Diploma">Diploma</option>
+                                                    <option value="Sarjana">Sarjana</option>
+                                                    <option value="Magister">Magister</option>
+                                                    <option value="Doktor">Doktor</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="institusi">Institusi</label>
+                                                <input type="text" class="form-control" id="institusi" name="institusi"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class='col-sm-2'>
+                                            <div class="form-group">
+                                                <label for="masuk">Tahun Masuk</label>
+                                                <input type="text" class="form-control" id="masuk" name="masuk"
+                                                    placeholder="YYYY" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label for="lulus">Tahun Lulus</label>
+                                                <input type="text" class="form-control" id="lulus" name="lulus"
+                                                    placeholder="YYYY" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p align='right' class="right">
+                                    <button type="button" id="remove-field" class="btn btn-danger" style="width: 7%">Hapus</button>
+                                </p>
+                                <hr>
+                            </div>
+                        </div>
+                        <p align='right' class="right">
+                            <button type="button" id="add-field" class="btn btn-olive" style="width: 7%">Tambah</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <p align="right">
+                <button id="submit" type="submit" class="btn btn-olive" style="width: 7%">Submit</button>
+            </p>
+        </div>
+    </form>
+</div>
+
+<th:block layout:fragment="add-scripts">
+    <!-- script jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- datepicker -->
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <script>
+        $(function () {
+            $("#tanggalLahir").datepicker({
+                dateFormat: "dd MM yy",
+                changeYear: true,
+                changeMonth: true,
+                yearRange: "c-150:c"
+            });
+        });
+    </script>
+    <script>
+        $('.multi-field-wrapper').each(function () {
+            var $wrapper = $('.multi-fields', this);
+            $("#add-field", $(this)).click(function (e) {
+                $('.multi-field:first-child', $wrapper).clone(true).appendTo($wrapper).find('input').val('').focus();
+            });
+            $('.multi-field .right #remove-field', $wrapper).click(function () {
+                if ($('.multi-field', $wrapper).length > 1)
+                    $(this). parent('.right').parent('.multi-field').remove();
+            });
+        });
+    </script>
+    <script>
+        $('#submit').click(function () {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                onOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'success',
+                title: 'Submitted successfully'
+            })
+        });
+    </script>
+    <script>
+        $('#reset').click(function () {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                onOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'success',
+                title: 'All data reset successfully'
+            })
+        });
+    </script>
+</th:block>
+
+</html>
