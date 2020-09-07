@@ -1,5 +1,7 @@
 package com.hzukhruf.genbe.model.dto;
 
+import java.util.List;
+
 public class PersonBioDto {
 	private Integer idPerson;
 	private Integer idBio;
@@ -9,7 +11,7 @@ public class PersonBioDto {
 	private String hp;
 	private String tanggalLahir;
 	private String tempatLahir;
-	private PendidikanDto pendidikanDto;
+	private List<PendidikanDto> pendidikanDtoList;
 	
 	public Integer getIdPerson() {
 		return idPerson;
@@ -59,12 +61,13 @@ public class PersonBioDto {
 	public void setTempatLahir(String tempatLahir) {
 		this.tempatLahir = tempatLahir;
 	}
-	public PendidikanDto getPendidikanDto() {
-		return pendidikanDto;
+	public List<PendidikanDto> getPendidikanDtoList() {
+		return pendidikanDtoList;
 	}
-	public void setPendidikanDto(PendidikanDto pendidikanDto) {
-		this.pendidikanDto = pendidikanDto;
+	public void setPendidikanDtoList(List<PendidikanDto> pendidikanDtoList) {
+		this.pendidikanDtoList = pendidikanDtoList;
 	}
+	
 	
 	
 

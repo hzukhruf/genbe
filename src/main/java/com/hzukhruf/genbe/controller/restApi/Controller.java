@@ -15,12 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hzukhruf.genbe.model.dto.PersonBioDto;
 import com.hzukhruf.genbe.model.dto.PersonBioPendidikanDto;
-import com.hzukhruf.genbe.model.dto.PendidikanDto;
 import com.hzukhruf.genbe.model.dto.StatusData;
 import com.hzukhruf.genbe.model.dto.StatusDto;
 import com.hzukhruf.genbe.model.entity.Biodata;
@@ -28,8 +26,7 @@ import com.hzukhruf.genbe.model.entity.Person;
 import com.hzukhruf.genbe.repository.BiodataRepository;
 import com.hzukhruf.genbe.repository.PendidikanRepository;
 import com.hzukhruf.genbe.repository.PersonRepository;
-import com.hzukhruf.genbe.service.DataPendidikanService;
-import com.hzukhruf.genbe.service.DataPersonService;
+import com.hzukhruf.genbe.service.DataService;
 
 @RestController
 @RequestMapping("/dataPerson")
@@ -41,9 +38,7 @@ public class Controller {
 	@Autowired
 	private PendidikanRepository pendidikanRepository;
 	@Autowired
-	private DataPersonService dataPersonService;
-	@Autowired
-	private DataPendidikanService dataPendidikanService;
+	private DataService dataService;
 
 	private int umur(PersonBioDto data) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy");
@@ -71,7 +66,7 @@ public class Controller {
 			statusDto.setStatus(false);
 			statusDto.setMessage("data gagal masuk, jumlah digit nik tidak sama dengan 16");
 		} else {
-			dataPersonService.insertData(data);
+			dataService.insertData(data);
 			statusDto.setStatus(true);
 			statusDto.setMessage("data berhasil masuk");
 		}
@@ -79,19 +74,19 @@ public class Controller {
 	}
 
 	// insert data pendidikan berdasarkan id person
-	@PostMapping("/insertPendidikan")
-	public StatusDto pendidikan(@RequestParam Integer idPerson, @RequestBody List<PendidikanDto> dataList) {
-		StatusDto statusDto = new StatusDto();
-		try {
-			dataPendidikanService.insertdataPendidikan(idPerson, dataList);
-			statusDto.setStatus(true);
-			statusDto.setMessage("data berhasil masuk");
-		} catch (Exception e) {
-			statusDto.setStatus(false);
-			statusDto.setMessage("data gagal masuk");
-		}
-		return statusDto;
-	}
+//	@PostMapping("/insertPendidikan")
+//	public StatusDto pendidikan(@RequestBody List<PendidikanDto> dataList) {
+//		StatusDto statusDto = new StatusDto();
+//		try {
+//			dataService.insertdataPendidikan(dataList);
+//			statusDto.setStatus(true);
+//			statusDto.setMessage("data berhasil masuk");
+//		} catch (Exception e) {
+//			statusDto.setStatus(false);
+//			statusDto.setMessage("data gagal masuk");
+//		}
+//		return statusDto;
+//	}
 
 
 	// Get mapping by nik
@@ -126,18 +121,18 @@ public class Controller {
 	}
 	
 	private PersonBioPendidikanDto convertToDto(Person person, Biodata biodata) {
-		PersonBioPendidikanDto dataDto2 = new PersonBioPendidikanDto();
+		PersonBioPendidikanDto personBioPendidikanDto = new PersonBioPendidikanDto();
 		Integer id = person.getIdPerson();
-		dataDto2.setNik(person.getNik());
-		dataDto2.setName(person.getNama());
-		dataDto2.setAddress(person.getAlamat());
-		dataDto2.setHp(biodata.getNoHp());
+		personBioPendidikanDto.setNik(person.getNik());
+		personBioPendidikanDto.setNama(person.getNama());
+		personBioPendidikanDto.setAlamat(person.getAlamat());
+		personBioPendidikanDto.setHp(biodata.getNoHp());
 
 		// convert date to String
 		DateFormat format = new SimpleDateFormat("dd-MMMMMMMMM-yyyy");
 		String date = format.format(biodata.getTanggalLahir());
-		dataDto2.setTgl(date);
-		dataDto2.setTempatLahir(biodata.getTempatLahir());
+		personBioPendidikanDto.setTanggalLahir(date);
+		personBioPendidikanDto.setTempatLahir(biodata.getTempatLahir());
 
 		// set Umur
 		LocalDate birthYear = biodata.getTanggalLahir().toInstant().atZone(ZoneId.systemDefault())
@@ -146,9 +141,9 @@ public class Controller {
 		Period p = Period.between(birthYear, dateNow);
 		int umur = p.getYears();
 
-		dataDto2.setUmur(umur);
-		dataDto2.setPendidikanTerakhir(pendidikanRepository.cariPendidikanTerakhir(id));
-		return dataDto2;
+		personBioPendidikanDto.setUmur(umur);
+		personBioPendidikanDto.setPendidikanTerakhir(pendidikanRepository.cariPendidikanTerakhir(id));
+		return personBioPendidikanDto;
 	}
 
 }
