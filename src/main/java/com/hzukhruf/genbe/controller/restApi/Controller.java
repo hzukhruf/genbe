@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hzukhruf.genbe.model.dto.DataDto1;
-import com.hzukhruf.genbe.model.dto.DataDto2;
-import com.hzukhruf.genbe.model.dto.DataDto3;
-import com.hzukhruf.genbe.model.dto.Status2;
+import com.hzukhruf.genbe.model.dto.PersonBioDto;
+import com.hzukhruf.genbe.model.dto.PersonBioPendidikanDto;
+import com.hzukhruf.genbe.model.dto.PendidikanDto;
+import com.hzukhruf.genbe.model.dto.StatusData;
 import com.hzukhruf.genbe.model.dto.StatusDto;
 import com.hzukhruf.genbe.model.entity.Biodata;
 import com.hzukhruf.genbe.model.entity.Person;
@@ -45,7 +45,7 @@ public class Controller {
 	@Autowired
 	private DataPendidikanService dataPendidikanService;
 
-	private int umur(DataDto1 data) {
+	private int umur(PersonBioDto data) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy");
 		LocalDate birthYear = LocalDate.parse(data.getTgl(), formatter);
 		LocalDate dateNow = LocalDate.now();
@@ -57,7 +57,7 @@ public class Controller {
 	// insert data person
 	// Insert Tanggal dengan format dd-Month-yyyy (Month full name in english)
 	@PostMapping 
-	public StatusDto insert(@RequestBody DataDto1 data) {
+	public StatusDto insert(@RequestBody PersonBioDto data) {
 		StatusDto statusDto = new StatusDto();
 		int umur = umur(data);
 		if (umur < 30 && data.getNik().length() != 16) {
@@ -80,7 +80,7 @@ public class Controller {
 
 	// insert data pendidikan berdasarkan id person
 	@PostMapping("/insertPendidikan")
-	public StatusDto pendidikan(@RequestParam Integer idPerson, @RequestBody List<DataDto3> dataList) {
+	public StatusDto pendidikan(@RequestParam Integer idPerson, @RequestBody List<PendidikanDto> dataList) {
 		StatusDto statusDto = new StatusDto();
 		try {
 			dataPendidikanService.insertdataPendidikan(idPerson, dataList);
@@ -99,13 +99,13 @@ public class Controller {
 	public List<Object> getByNik(@PathVariable String nik) {
 		List<Object> values = new ArrayList<>();
 		StatusDto statusDto = new StatusDto();
-		Status2 status2 = new Status2();
+		StatusData status2 = new StatusData();
 		if (nik.length() == 16) {
 			if (personRepository.findByNik(nik).isEmpty() == false) {
 				Person person = personRepository.findByNik(nik).get(0);
 				Integer id = person.getIdPerson();
 				Biodata biodata = biodataRepository.findAllByPersonIdPerson(id);
-				DataDto2 dataDto2 = convertToDto(person, biodata);
+				PersonBioPendidikanDto dataDto2 = convertToDto(person, biodata);
 				// set status message
 				status2.setStatus(true);
 				status2.setMessage("success");
@@ -125,8 +125,8 @@ public class Controller {
 
 	}
 	
-	private DataDto2 convertToDto(Person person, Biodata biodata) {
-		DataDto2 dataDto2 = new DataDto2();
+	private PersonBioPendidikanDto convertToDto(Person person, Biodata biodata) {
+		PersonBioPendidikanDto dataDto2 = new PersonBioPendidikanDto();
 		Integer id = person.getIdPerson();
 		dataDto2.setNik(person.getNik());
 		dataDto2.setName(person.getNama());

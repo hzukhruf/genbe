@@ -2,8 +2,8 @@ package com.hzukhruf.genbe.service;
 
 import java.util.List;
 
-import com.hzukhruf.genbe.model.dto.DataDto3;
+import com.hzukhruf.genbe.model.dto.PendidikanDto;
 
 public interface DataPendidikanService {
-	List<DataDto3> insertdataPendidikan(Integer idPerson,List<DataDto3> dataList);
+	List<PendidikanDto> insertdataPendidikan(Integer idPerson,List<PendidikanDto> dataList);
 }

@@ -1,7 +1,7 @@
 package com.hzukhruf.genbe.service;
 
-import com.hzukhruf.genbe.model.dto.DataDto1;
+import com.hzukhruf.genbe.model.dto.PersonBioDto;
 
 public interface DataPersonService {
-	DataDto1 insertData(DataDto1 dataDto1);
+	PersonBioDto insertData(PersonBioDto dataDto1);
 }

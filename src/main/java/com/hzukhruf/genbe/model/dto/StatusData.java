@@ -1,9 +1,9 @@
 package com.hzukhruf.genbe.model.dto;
 
-public class Status2 {
+public class StatusData {
 	private boolean status;
 	private String message;
-	private DataDto2 data;
+	private PersonBioPendidikanDto data;
 
 	public boolean isStatus() {
 		return status;
@@ -21,11 +21,11 @@ public class Status2 {
 		this.message = message;
 	}
 
-	public DataDto2 getData() {
+	public PersonBioPendidikanDto getData() {
 		return data;
 	}
 
-	public void setData(DataDto2 data) {
+	public void setData(PersonBioPendidikanDto data) {
 		this.data = data;
 	}
 

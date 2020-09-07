@@ -2,7 +2,7 @@ package com.hzukhruf.genbe.model.dto;
 
 import java.util.Date;
 
-public class DataDto1 {
+public class PersonBioDto {
 	private Integer idPerson;
 	private Integer idBio;
 	private String nik;

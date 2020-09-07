@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hzukhruf.genbe.model.dto.DataDto3;
+import com.hzukhruf.genbe.model.dto.PendidikanDto;
 import com.hzukhruf.genbe.model.entity.Pendidikan;
 import com.hzukhruf.genbe.model.entity.Person;
 import com.hzukhruf.genbe.repository.PendidikanRepository;
@@ -21,7 +21,7 @@ public class DataPendidikanServiceImpl implements DataPendidikanService {
 	private PendidikanRepository pendidikanRepository;
 
 	@Override
-	public List<DataDto3> insertdataPendidikan(Integer idPerson, List<DataDto3> dataList) {
+	public List<PendidikanDto> insertdataPendidikan(Integer idPerson, List<PendidikanDto> dataList) {
 		dataList.forEach(data -> {
 			Pendidikan pendidikan = convertToEntityPendidikan(idPerson, data);
 			pendidikanRepository.save(pendidikan);
@@ -29,7 +29,7 @@ public class DataPendidikanServiceImpl implements DataPendidikanService {
 		return dataList;
 	}
 
-	private Pendidikan convertToEntityPendidikan(Integer idPerson, DataDto3 data) {
+	private Pendidikan convertToEntityPendidikan(Integer idPerson, PendidikanDto data) {
 		Pendidikan pendidikan = new Pendidikan();
 		pendidikan.setIdPendidikan(data.getIdPendidikan());
 		pendidikan.setJenjang(data.getJenjang());

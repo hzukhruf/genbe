@@ -1,6 +1,6 @@
 package com.hzukhruf.genbe.model.dto;
 
-public class DataDto3 {
+public class PendidikanDto {
 	private Integer idPendidikan;
 	private String jenjang;
 	private String institusi;

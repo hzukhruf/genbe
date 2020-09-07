@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hzukhruf.genbe.model.dto.DataDto1;
+import com.hzukhruf.genbe.model.dto.PersonBioDto;
 import com.hzukhruf.genbe.model.entity.Biodata;
 import com.hzukhruf.genbe.model.entity.Person;
 import com.hzukhruf.genbe.repository.BiodataRepository;
@@ -24,7 +24,7 @@ public class DataPersonServiceImpl implements DataPersonService {
 	private BiodataRepository biodataRepository;
 
 	@Override
-	public DataDto1 insertData(DataDto1 data) {
+	public PersonBioDto insertData(PersonBioDto data) {
 		Person person = convertToEntityPerson(data);
 		personRepository.save(person);
 		data.setIdPerson(person.getIdPerson());
@@ -34,7 +34,7 @@ public class DataPersonServiceImpl implements DataPersonService {
 		return data;
 	}
 	
-	private Person convertToEntityPerson(DataDto1 data){
+	private Person convertToEntityPerson(PersonBioDto data){
 		Person person = new Person();
 		person.setNik(data.getNik());
 		person.setNama(data.getName());
@@ -42,7 +42,7 @@ public class DataPersonServiceImpl implements DataPersonService {
 		return person;
 	}
 	
-	private Biodata convertToEntityBiodata(DataDto1 data) {
+	private Biodata convertToEntityBiodata(PersonBioDto data) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy");
 		LocalDate birthYear = LocalDate.parse(data.getTgl(), formatter);
 		Date bYear = Date.from(birthYear.atStartOfDay(ZoneId.systemDefault()).toInstant());
