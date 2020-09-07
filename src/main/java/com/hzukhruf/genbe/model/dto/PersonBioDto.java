@@ -11,7 +11,7 @@ public class PersonBioDto {
 	private String hp;
 	private String tanggalLahir;
 	private String tempatLahir;
-	private List<PendidikanDto> pendidikanDtoList;
+	//private List<PendidikanDto> pendidikanDtoList;
 	
 	public Integer getIdPerson() {
 		return idPerson;
@@ -61,12 +61,12 @@ public class PersonBioDto {
 	public void setTempatLahir(String tempatLahir) {
 		this.tempatLahir = tempatLahir;
 	}
-	public List<PendidikanDto> getPendidikanDtoList() {
-		return pendidikanDtoList;
-	}
-	public void setPendidikanDtoList(List<PendidikanDto> pendidikanDtoList) {
-		this.pendidikanDtoList = pendidikanDtoList;
-	}
+//	public List<PendidikanDto> getPendidikanDtoList() {
+//		return pendidikanDtoList;
+//	}
+//	public void setPendidikanDtoList(List<PendidikanDto> pendidikanDtoList) {
+//		this.pendidikanDtoList = pendidikanDtoList;
+//	}
 	
 	
 	

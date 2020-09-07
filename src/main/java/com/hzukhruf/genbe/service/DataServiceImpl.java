@@ -40,12 +40,12 @@ public class DataServiceImpl implements DataService {
 		biodata.setPerson(person);
 		biodataRepository.save(biodata);
 		//pendidikan
-		List<PendidikanDto> pendidikanDtoList= data.getPendidikanDtoList();
-		pendidikanDtoList.forEach(dataList -> {
-			Pendidikan pendidikan = convertToEntityPendidikan(dataList);
-			pendidikan.setPerson(person);
-			pendidikanRepository.save(pendidikan);
-		});
+//		List<PendidikanDto> pendidikanDtoList= data.getPendidikanDtoList();
+//		pendidikanDtoList.forEach(dataList -> {
+//			Pendidikan pendidikan = convertToEntityPendidikan(dataList);
+//			pendidikan.setPerson(person);
+//			pendidikanRepository.save(pendidikan);
+//		});
 		return data;
 	}
 	

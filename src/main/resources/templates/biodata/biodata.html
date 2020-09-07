@@ -120,13 +120,15 @@
                                     </div>
                                 </div>
                                 <p align='right' class="right">
-                                    <button type="button" id="remove-field" class="btn btn-danger" style="width: 3cm;">Hapus</button>
+                                    <button type="button" id="remove-field" class="btn btn-danger"
+                                        style="width: 3cm;">Hapus</button>
                                 </p>
                                 <hr>
                             </div>
                         </div>
                         <p align='right' class="right">
-                            <button type="button" id="add-field" class="btn btn-olive" style="width: 3cm">Tambah</button>
+                            <button type="button" id="add-field" class="btn btn-olive"
+                                style="width: 3cm">Tambah</button>
                         </p>
                     </div>
                 </div>
@@ -144,6 +146,7 @@
 <th:block layout:fragment="add-scripts">
     <!-- script jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>
+    <script src="../../dist/js/biodata.js"></script>
     <!-- datepicker -->
     <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <!-- Bootstrap 4 -->
@@ -170,47 +173,15 @@
             });
             $('.multi-field .right #remove-field', $wrapper).click(function () {
                 if ($('.multi-field', $wrapper).length > 1)
-                    $(this). parent('.right').parent('.multi-field').remove();
+                    $(this).parent('.right').parent('.multi-field').remove();
             });
         });
+        
     </script>
     <script>
         $('#submit').click(function () {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                onOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            })
-            Toast.fire({
-                icon: 'success',
-                title: 'Submitted successfully'
-            })
-        });
-    </script>
-    <script>
-        $('#reset').click(function () {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                onOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            })
-            Toast.fire({
-                icon: 'success',
-                title: 'All data reset successfully'
-            })
-        });
+            formBiodata.saveForm()
+        })
     </script>
 </th:block>
 
