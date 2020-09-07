@@ -47,7 +47,7 @@ public class Controller {
 
 	private int umur(PersonBioDto data) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy");
-		LocalDate birthYear = LocalDate.parse(data.getTgl(), formatter);
+		LocalDate birthYear = LocalDate.parse(data.getTanggalLahir(), formatter);
 		LocalDate dateNow = LocalDate.now();
 		Period p = Period.between(birthYear, dateNow);
 		int umur = p.getYears();

@@ -1,13 +1,11 @@
 package com.hzukhruf.genbe.model.dto;
 
-import java.util.Date;
-
 public class PersonBioPendidikanDto {
 	private String nik;
-	private String name;
-	private String address;
+	private String nama;
+	private String alamat;
 	private String hp;
-	private String tgl;
+	private String tanggalLahir;
 	private String tempatLahir;
 	private Integer umur;
 	private String pendidikanTerakhir;
@@ -18,17 +16,17 @@ public class PersonBioPendidikanDto {
 	public void setNik(String nik) {
 		this.nik = nik;
 	}
-	public String getName() {
-		return name;
+	public String getNama() {
+		return nama;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setNama(String nama) {
+		this.nama = nama;
 	}
-	public String getAddress() {
-		return address;
+	public String getAlamat() {
+		return alamat;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAlamat(String alamat) {
+		this.alamat = alamat;
 	}
 	public String getHp() {
 		return hp;
@@ -36,11 +34,11 @@ public class PersonBioPendidikanDto {
 	public void setHp(String hp) {
 		this.hp = hp;
 	}
-	public String getTgl() {
-		return tgl;
+	public String getTanggalLahir() {
+		return tanggalLahir;
 	}
-	public void setTgl(String tgl) {
-		this.tgl = tgl;
+	public void setTanggalLahir(String tanggalLahir) {
+		this.tanggalLahir = tanggalLahir;
 	}
 	public String getTempatLahir() {
 		return tempatLahir;
@@ -60,6 +58,10 @@ public class PersonBioPendidikanDto {
 	public void setPendidikanTerakhir(String pendidikanTerakhir) {
 		this.pendidikanTerakhir = pendidikanTerakhir;
 	}
+	
+	
+	
+	
 
 	
 	
