@@ -1,9 +1,5 @@
 package com.hzukhruf.genbe.service;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,13 +39,10 @@ public class DataPersonServiceImpl implements DataPersonService {
 	}
 	
 	private Biodata convertToEntityBiodata(DataDto1 data) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy");
-		LocalDate birthYear = LocalDate.parse(data.getTgl(), formatter);
-		Date bYear = Date.from(birthYear.atStartOfDay(ZoneId.systemDefault()).toInstant());
 		Biodata biodata = new Biodata();
 		biodata.setIdBio(data.getIdBio());
 		biodata.setNoHp(data.getHp());
-		biodata.setTanggalLahir(bYear);
+		biodata.setTanggalLahir(data.getTgl());
 		biodata.setTempatLahir(data.getTempatLahir());
 		return biodata;
 	}

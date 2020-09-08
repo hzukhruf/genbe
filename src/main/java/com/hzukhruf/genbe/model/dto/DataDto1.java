@@ -1,6 +1,6 @@
 package com.hzukhruf.genbe.model.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class DataDto1 {
 	private Integer idPerson;
@@ -9,7 +9,7 @@ public class DataDto1 {
 	private String name;
 	private String address;
 	private String hp;
-	private String tgl;
+	private Date tgl;
 	private String tempatLahir;
 
 	public String getNik() {
@@ -44,11 +44,11 @@ public class DataDto1 {
 		this.hp = hp;
 	}
 
-	public String getTgl() {
+	public Date getTgl() {
 		return tgl;
 	}
 
-	public void setTgl(String tgl) {
+	public void setTgl(Date tgl) {
 		this.tgl = tgl;
 	}
 

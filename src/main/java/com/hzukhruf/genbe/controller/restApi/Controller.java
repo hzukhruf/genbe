@@ -46,8 +46,7 @@ public class Controller {
 	private DataPendidikanService dataPendidikanService;
 
 	private int umur(DataDto1 data) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy");
-		LocalDate birthYear = LocalDate.parse(data.getTgl(), formatter);
+		LocalDate birthYear = data.getTgl().toLocalDate();
 		LocalDate dateNow = LocalDate.now();
 		Period p = Period.between(birthYear, dateNow);
 		int umur = p.getYears();
@@ -56,7 +55,7 @@ public class Controller {
 
 	// insert data person
 	// Insert Tanggal dengan format dd-Month-yyyy (Month full name in english)
-	@PostMapping 
+	@PostMapping
 	public StatusDto insert(@RequestBody DataDto1 data) {
 		StatusDto statusDto = new StatusDto();
 		int umur = umur(data);
@@ -93,15 +92,35 @@ public class Controller {
 		return statusDto;
 	}
 
+	@GetMapping("/getData")
+	public List<DataDto1> getData() {
+		List<DataDto1> dataDtoList = new ArrayList<>();
+		List<Person> persons = personRepository.findAll();
+		for (Person person : persons) {
+			DataDto1 dataDto1 = new DataDto1();
+            Biodata biodata = biodataRepository.findByPersonIdPerson(person.getIdPerson());
+            dataDto1.setIdBio(biodata.getIdBio());
+            dataDto1.setHp(biodata.getNoHp());
+            dataDto1.setTgl(biodata.getTanggalLahir());
+            dataDto1.setTempatLahir(biodata.getTempatLahir());
+            dataDto1.setName(person.getNama());
+            dataDto1.setAddress(person.getAlamat());
+            dataDto1.setIdPerson(person.getIdPerson());
+            dataDto1.setNik(person.getNik());
+            dataDtoList.add(dataDto1);
+        }
+		return dataDtoList;
+	}
 
 	// Get mapping by nik
 	@GetMapping("/{nik}")
 	public List<Object> getByNik(@PathVariable String nik) {
 		List<Object> values = new ArrayList<>();
-		StatusDto statusDto = new StatusDto();
 		Status2 status2 = new Status2();
+		StatusDto statusDto = new StatusDto();
 		if (nik.length() == 16) {
 			if (personRepository.findByNik(nik).isEmpty() == false) {
+				
 				Person person = personRepository.findByNik(nik).get(0);
 				Integer id = person.getIdPerson();
 				Biodata biodata = biodataRepository.findAllByPersonIdPerson(id);
@@ -112,11 +131,13 @@ public class Controller {
 				status2.setData(dataDto2);
 				values.add(status2);
 			} else {
+				
 				statusDto.setStatus(true);
 				statusDto.setMessage("data dengan nik " + nik + " tidak ditemukan");
 				values.add(statusDto);
 			}
 		} else {
+			
 			statusDto.setStatus(false);
 			statusDto.setMessage("data gagal masuk, jumlah digit nik tidak sama dengan 16");
 			values.add(statusDto);
@@ -124,7 +145,7 @@ public class Controller {
 		return values;
 
 	}
-	
+
 	private DataDto2 convertToDto(Person person, Biodata biodata) {
 		DataDto2 dataDto2 = new DataDto2();
 		Integer id = person.getIdPerson();
@@ -134,14 +155,11 @@ public class Controller {
 		dataDto2.setHp(biodata.getNoHp());
 
 		// convert date to String
-		DateFormat format = new SimpleDateFormat("dd-MMMMMMMMM-yyyy");
-		String date = format.format(biodata.getTanggalLahir());
-		dataDto2.setTgl(date);
+		dataDto2.setTgl(biodata.getTanggalLahir());
 		dataDto2.setTempatLahir(biodata.getTempatLahir());
 
 		// set Umur
-		LocalDate birthYear = biodata.getTanggalLahir().toInstant().atZone(ZoneId.systemDefault())
-				.toLocalDate();
+		LocalDate birthYear = biodata.getTanggalLahir().toLocalDate();
 		LocalDate dateNow = LocalDate.now();
 		Period p = Period.between(birthYear, dateNow);
 		int umur = p.getYears();

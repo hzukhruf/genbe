@@ -1,6 +1,6 @@
 package com.hzukhruf.genbe.model.entity;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.*;
 

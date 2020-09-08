@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html layout:decorate="~{base}" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div class="row mb-2" layout:fragment="content-header">
+    <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Biodata</h1>
+    </div>
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item active"><a href="#">Biodata</a></li>
+            <li class="breadcrumb-item active">Kelola</li>
+        </ol>
+    </div>
+</div>
+
+<div class="card  card-outline card-olive" layout:fragment="content-body">
+    <div class="card-header">
+        <h3 class="card-title" style="font-size: 18pt;">Biodata Diri</h3>
+    </div>
+    <!-- /.card-header -->
+    <form role="form" id=formNik>
+        <div class='card-body'>
+            <div class="input-group input-group-sm" style="width: 7cm">
+                <input class="form-control" id='getNik' type="search" placeholder="Cari berdasarkan NIK"
+                    aria-label="Search">
+                <div class="input-group-append">
+                    <button id='search' class="btn btn-navbar" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <div class="card-body table-responsive">
+        <table class="table table-striped table-bordered table-hover nowrap" id="tableBiodataByNik" style="width:100%">
+        </table>
+    </div>
+    <!-- /.card-body -->
+    <!-- /.card -->
+    <!-- /.col -->
+    <!-- /.card-header -->
+</div>
+
+<th:block layout:fragment="add-scripts">
+    <script src="../../dist/js/biodata.js"></script>
+    <!-- datepicker -->
+    <!-- <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script> -->
+    <!-- Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!--     <script> -->
+    <!-- //         $(function () { -->
+    <!-- //             $("#tanggalLahir").datepicker({ -->
+    <!-- //                 dateFormat: "dd-MM-yy", -->
+    <!-- //                 changeYear: true, -->
+    <!-- //                 changeMonth: true, -->
+    <!-- //                 yearRange: "c-150:c" -->
+    <!-- //             }); -->
+    <!-- //         }); -->
+    <!--     </script> -->
+    <script>
+        $('#search').click(function () {
+            tableBiodataByNik.create($('#getNik').val());
+        })
+
+    </script>
+</th:block>
+
+</html>
