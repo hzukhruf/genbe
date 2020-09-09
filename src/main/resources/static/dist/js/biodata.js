@@ -99,30 +99,28 @@ var formBiodata = {
         });
 
     },
-    setEditData: function (idCabang) {
-        formBiodata.resetForm();
+    // setEditData: function (idCabang) {
+    //     formBiodata.resetForm();
 
-        $.ajax({
-            url: '/api/biodata/' + idCabang,
-            method: 'get',
-            contentType: 'application/json',
-            dataType: 'json',
-            success: function (res, status, xhr) {
-                if (xhr.status == 200 || xhr.status == 201) {
-                    $('#form-biodata').fromJSON(JSON.stringify(res));
-                    $('#modal-biodata').modal('show')
+    //     $.ajax({
+    //         url: '/api/biodata/' + idCabang,
+    //         method: 'get',
+    //         contentType: 'application/json',
+    //         dataType: 'json',
+    //         success: function (res, status, xhr) {
+    //             if (xhr.status == 200 || xhr.status == 201) {
+    //                 $('#form-biodata').fromJSON(JSON.stringify(res));
+    //                 $('#modal-biodata').modal('show')
 
-                } else {
+    //             } else {
 
-                }
-            },
-            erorrr: function (err) {
-                console.log(err);
-            }
-        });
-
-
-    }
+    //             }
+    //         },
+    //         erorrr: function (err) {
+    //             console.log(err);
+    //         }
+    //     });
+    // }
 
 };
 var tableBiodataByNik = {
@@ -201,4 +199,70 @@ var tableBiodataByNik = {
 
 
     }
+};
+
+var formPendidikan = {
+    create: function(){
+        var listPendidikan = getJsonForm($("#form-pendidikan").serializeArray(), true);
+        pendidikanForm.push(listPendidikan);
+        $('#modal-pendidikan').modal('hide')
+        if ($.fn.DataTable.isDataTable('#tablePendidikan')) {
+            //table yg sudah dibentuk menjadi datatable harus d rebuild lagi untuk di instantiasi ulang
+            $('#tablePendidikan').DataTable().clear();
+            $('#tablePendidikan').DataTable().destroy();
+        }
+        $('#tablePendidikan').DataTable({
+            data: pendidikanForm,
+            columns: [
+                {
+                    title: "Jenjang",
+                    data: "jenjang"
+                },
+                {
+                    title: "Institusi",
+                    data: "institusi"
+                },
+                {
+                    title: "Tahun Masuk",
+                    data: "masuk"
+                },
+                {
+                    title: "Tahun Lulus",
+                    data: "lulus"
+                }
+            ]
+        });
+
+    },
+    resetForm: function () {
+        $('#form-pendidikan')[0].reset();
+    },
+    saveForm: function (idPerson, pendidikanForm) {
+        $.ajax({
+            url: '/dataPerson/insertPendidikan?idPerson='+idPerson,
+            method: 'post',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(pendidikanForm),
+            success: function (result) {  
+                if (result.status == true) {
+                    Swal.fire(
+                        'Sukses!',
+                        result.message,
+                        'success'
+                    )
+                } else {
+                    Swal.fire(
+                        'Gagal!',
+                        result.message,
+                        'error'
+                    )
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+
+    },
 };

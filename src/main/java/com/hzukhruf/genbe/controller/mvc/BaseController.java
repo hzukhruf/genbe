@@ -11,6 +11,11 @@ public class BaseController {
         return "biodata/biodata";
     }
 	
+	@GetMapping("/pendidikan.html")
+    public String pendidikan() {
+        return "biodata/pendidikan";
+    }
+	
 	@GetMapping("/getBiodataNik.html")
     public String getNik() {
         return "biodata/nikbio";
