@@ -119,8 +119,7 @@ public class Controller {
 		Status2 status2 = new Status2();
 		StatusDto statusDto = new StatusDto();
 		if (nik.length() == 16) {
-			if (personRepository.findByNik(nik).isEmpty() == false) {
-				
+			if (personRepository.findByNik(nik).isEmpty() == false) {	
 				Person person = personRepository.findByNik(nik).get(0);
 				Integer id = person.getIdPerson();
 				Biodata biodata = biodataRepository.findAllByPersonIdPerson(id);
@@ -131,13 +130,11 @@ public class Controller {
 				status2.setData(dataDto2);
 				values.add(status2);
 			} else {
-				
-				statusDto.setStatus(true);
+				statusDto.setStatus(false);
 				statusDto.setMessage("data dengan nik " + nik + " tidak ditemukan");
 				values.add(statusDto);
 			}
-		} else {
-			
+		} else {	
 			statusDto.setStatus(false);
 			statusDto.setMessage("data gagal masuk, jumlah digit nik tidak sama dengan 16");
 			values.add(statusDto);
