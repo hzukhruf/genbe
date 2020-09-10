@@ -6,7 +6,6 @@ var tableBiodata = {
             $('#tableBiodata').DataTable().clear();
             $('#tableBiodata').DataTable().destroy();
         }
-
         $.ajax({
             url: '/dataPerson/getData',
             method: 'get',
@@ -142,11 +141,11 @@ var tableBiodataByNik = {
                 console.log(result);
                 console.log(xhr.status);
                 console.log(result[0].status);
-                if (result[0].status==true) {
+                if (result[0].status == true) {
                     $('#tableBiodataByNik').DataTable({
-                    	"paging":   false,
+                        "paging": false,
                         "ordering": false,
-                        "info":     false,
+                        "info": false,
                         "searching": false,
                         "lengthChange": false,
                         "autoWidth": false,
@@ -192,11 +191,11 @@ var tableBiodataByNik = {
                         'success'
                     )
                 } else {
-                	Swal.fire(
-                            'Gagal!',
-                            result[0].message,
-                            'error'
-                        )
+                    Swal.fire(
+                        'Gagal!',
+                        result[0].message,
+                        'error'
+                    )
                 }
             },
             error: function (err) {
@@ -206,72 +205,4 @@ var tableBiodataByNik = {
     }
 };
 
-var formPendidikan = {
-    create: function(){
-        var listPendidikan = getJsonForm($("#form-pendidikan").serializeArray(), true);
-        pendidikanForm.push(listPendidikan);
-        console.log(listPendidikan);
-        $('#modal-pendidikan').modal('hide')
-        if ($.fn.DataTable.isDataTable('#tablePendidikan')) {
-            //table yg sudah dibentuk menjadi datatable harus d rebuild lagi untuk di instantiasi ulang
-            $('#tablePendidikan').DataTable().clear();
-            $('#tablePendidikan').DataTable().destroy();
-        }
-        $('#tablePendidikan').DataTable({
-            data: pendidikanForm,
-            columns: [
-                {
-                    title: "Jenjang",
-                    data: "jenjang"
-                },
-                {
-                    title: "Institusi",
-                    data: "institusi"
-                },
-                {
-                    title: "Tahun Masuk",
-                    data: "masuk"
-                },
-                {
-                    title: "Tahun Lulus",
-                    data: "lulus"
-                }
-            ]
-        });
 
-    },
-    resetForm: function () {
-        $('#form-pendidikan')[0].reset();
-    },
-    saveForm: function (idPerson, pendidikanForm) {
-    		$.ajax({
-                url: '/dataPerson/insertPendidikan?idPerson='+idPerson,
-                method: 'post',
-                contentType: 'application/json',
-                dataType: 'json',
-                data: JSON.stringify(pendidikanForm),
-                success: function (result) {
-                	if (result.status == true) {
-                        Swal.fire(
-                            'Sukses!',
-                            result.message,
-                            'success'
-                        )
-                    } else {
-                        Swal.fire(
-                            'Gagal!',
-                            result.message,
-                            'error'
-                        )
-                    }
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
-            
-           $('#tablePendidikan').DataTable().clear();
-           $('#tablePendidikan').DataTable().destroy();
-           $('#tablePendidikan').empty();
-    },
-};

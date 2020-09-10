@@ -15,8 +15,7 @@
 	</div>
 </div>
 
-<div class="card  card-outline card-olive"
-	layout:fragment="content-body">
+<div class="card card-outline card-olive" layout:fragment="content-body">
 	<div class="card-header">
 		<h3 class="card-title" style="font-size: 18pt;">Riwayat
 			Pendidikan</h3>
@@ -25,34 +24,28 @@
 
 	<div class='card-body'>
 		<div class="input-group">
-			<input class="form-control" id='idPerson' type="text"
-				placeholder="Masukkan Id Person">
+			<input class="form-control" id='idPerson' type="text" placeholder="Masukkan Id Person">
 			<button class="btn btn-olive" id="btn-tambah-pendidikan">Tambah</button>
 		</div>
 	</div>
 
-	<form id="form-tabel-pendidikan" role="form">
-		<div class="card-body table-responsive">
-			<table class="table table-striped table-bordered table-hover nowrap"
-				id="tablePendidikan" style="width: 100%">
-			</table>
-		</div>
-		<div class="card-footer">
-			<p align="right">
-				<button id="submit" type="button" class="btn btn-olive">Submit</button>
-			</p>
-		</div>
-	</form>
 
-
+	<div class="card-body table-responsive">
+		<table class="table table-striped table-bordered table-hover nowrap" id="tablePendidikan" style="width: 100%">
+		</table>
+	</div>
+	<div class="card-footer">
+		<p align="right">
+			<button id="submit" type="button" class="btn btn-olive">Submit</button>
+		</p>
+	</div>
 
 	<div class="modal fade" id="modal-pendidikan">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title">Form Riwayat Pendidikan</h4>
-					<button aria-label="Close" class="close" data-dismiss="modal"
-						type="button">
+					<button aria-label="Close" class="close" data-dismiss="modal" type="button">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
@@ -60,9 +53,8 @@
 					<form id="form-pendidikan" role="form">
 						<input name="id" type="hidden" />
 						<div class="form-group">
-							<label align="center">Jenjang</label> <select
-								class="form-control select2" style="width: 100%;" id='jenjang'
-								name="jenjang" required>
+							<label align="center">Jenjang</label> <select class="form-control select2"
+								style="width: 100%;" id='jenjang' name="jenjang" required>
 								<option value="">Pilih salah satu</option>
 								<option value="SD">SD</option>
 								<option value="SMP">SMP</option>
@@ -75,25 +67,22 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="institusi">Institusi</label> <input type="text"
-								class="form-control" id="institusi" name="institusi" required>
+							<label for="institusi">Institusi</label> <input type="text" class="form-control"
+								id="institusi" name="institusi" required>
 						</div>
 						<div class="form-group">
-							<label for="masuk">Tahun Masuk</label> <input type="text"
-								class="form-control" id="masuk" name="masuk" placeholder="YYYY"
-								required>
+							<label for="masuk">Tahun Masuk</label> <input type="text" class="form-control" id="masuk"
+								name="masuk" placeholder="YYYY" required>
 						</div>
 						<div class="form-group">
-							<label for="masuk">Tahun Lulus</label> <input type="text"
-								class="form-control" id="lulus" name="lulus" placeholder="YYYY"
-								required>
+							<label for="masuk">Tahun Lulus</label> <input type="text" class="form-control" id="lulus"
+								name="lulus" placeholder="YYYY" required>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer justify-content-between">
 					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
-					<button class="btn btn-primary" id="btn-save-pendidikan"
-						type="button">Save</button>
+					<button class="btn btn-primary" id="btn-save-pendidikan" type="button">Save</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
@@ -101,10 +90,59 @@
 		<!-- /.modal-dialog -->
 	</div>
 
+	<div class="modal fade" id="modal-pendidikan-edit">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Form Riwayat Pendidikan</h4>
+					<button aria-label="Close" class="close" data-dismiss="modal" type="button">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="form-pendidikan-edit" role="form">
+						<input name="id" type="hidden" />
+						<div class="form-group">
+							<label align="center">Jenjang</label> <select class="form-control select2"
+								style="width: 100%;" id='jenjang' name="jenjang" required>
+								<option value="">Pilih salah satu</option>
+								<option value="SD">SD</option>
+								<option value="SMP">SMP</option>
+								<option value="SMA">SMA</option>
+								<option value="SMK">SMK</option>
+								<option value="Diploma">Diploma</option>
+								<option value="Sarjana">Sarjana</option>
+								<option value="Magister">Magister</option>
+								<option value="Doktor">Doktor</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="institusi">Institusi</label> <input type="text" class="form-control"
+								id="institusi" name="institusi" required>
+						</div>
+						<div class="form-group">
+							<label for="masuk">Tahun Masuk</label> <input type="text" class="form-control" id="masuk"
+								name="masuk" placeholder="YYYY" required>
+						</div>
+						<div class="form-group">
+							<label for="masuk">Tahun Lulus</label> <input type="text" class="form-control" id="lulus"
+								name="lulus" placeholder="YYYY" required>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+					<button class="btn btn-primary" id="btn-save-pendidikan-edit" type="button">Save</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
 </div>
 
 <th:block layout:fragment="add-scripts">
-	<script src="../../dist/js/biodata.js"></script>
+	<script src="../../dist/js/pendidikan.js"></script>
 	<!-- datepicker -->
 	<!-- <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script> -->
 	<!--     <script> -->
@@ -118,17 +156,26 @@
 	<!-- //         }); -->
 	<!--     </script> -->
 	<script>
+		idRow = -1;
 		$('#submit').hide();
-		$('#btn-tambah-pendidikan').click(function() {
+		$('#btn-tambah-pendidikan').click(function () {
 			formPendidikan.resetForm();
 			$('#modal-pendidikan').modal('show')
 		});
 		var pendidikanForm = [];
-		$('#btn-save-pendidikan').click(function() {
-			formPendidikan.create();
-			$('#submit').show();
+		$('#btn-save-pendidikan').click(function () {
+			//if (idRow == -1) {
+				formPendidikan.create();
+				$('#submit').show();
+			//}else{
+
+			//}
+
 		});
-		$('#submit').click(function() {
+		$('#btn-save-pendidikan-edit').click(function () {
+			formPendidikan.saveEditData();
+		});
+		$('#submit').click(function () {
 			formPendidikan.saveForm($('#idPerson').val(), pendidikanForm);
 			pendidikanForm = [];
 			$('#idPerson').val("");
