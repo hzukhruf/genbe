@@ -3,10 +3,11 @@ package com.hzukhruf.genbe.service;
 import java.util.List;
 
 import com.hzukhruf.genbe.model.dto.PendidikanDto;
-import com.hzukhruf.genbe.model.dto.PersonBioDto;
+
+import com.hzukhruf.genbe.model.entity.Biodata;
 
 public interface DataService {
-	PersonBioDto insertData(PersonBioDto dataDto1);
+	Biodata insertData(Biodata data);
 
 	List<PendidikanDto> insertdataPendidikan(Integer idPerson, List<PendidikanDto> dataList);
 }

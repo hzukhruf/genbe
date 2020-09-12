@@ -71,68 +71,18 @@
 								id="institusi" name="institusi" required>
 						</div>
 						<div class="form-group">
-							<label for="masuk">Tahun Masuk</label> <input type="text" class="form-control" id="masuk"
-								name="masuk" placeholder="YYYY" required>
+							<label for="tahunMasuk">Tahun Masuk</label> <input type="text" class="form-control"
+								id="tahunMasuk" name="tahunMasuk" placeholder="YYYY" required>
 						</div>
 						<div class="form-group">
-							<label for="masuk">Tahun Lulus</label> <input type="text" class="form-control" id="lulus"
-								name="lulus" placeholder="YYYY" required>
+							<label for="tahunLulus">Tahun Lulus</label> <input type="text" class="form-control"
+								id="tahunLulus" name="tahunLulus" placeholder="YYYY" required>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer justify-content-between">
 					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
 					<button class="btn btn-olive" id="btn-save-pendidikan" type="button">Save</button>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
-
-	<div class="modal fade" id="modal-pendidikan-edit">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header bg-olive">
-					<h4 class="modal-title">Form Riwayat Pendidikan</h4>
-					<button aria-label="Close" class="close" data-dismiss="modal" type="button">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form id="form-pendidikan-edit" role="form">
-						<input name="id" type="hidden" />
-						<div class="form-group">
-							<label align="center">Jenjang</label> <select class="form-control select2"
-								style="width: 100%;" id='jenjang' name="jenjang" required>
-								<option value="">Pilih salah satu</option>
-								<option value="SD">SD</option>
-								<option value="SMP">SMP</option>
-								<option value="SMA">SMA</option>
-								<option value="SMK">SMK</option>
-								<option value="Diploma">Diploma</option>
-								<option value="Sarjana">Sarjana</option>
-								<option value="Magister">Magister</option>
-								<option value="Doktor">Doktor</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="institusi">Institusi</label> <input type="text" class="form-control"
-								id="institusi" name="institusi" required>
-						</div>
-						<div class="form-group">
-							<label for="masuk">Tahun Masuk</label> <input type="text" class="form-control" id="masuk"
-								name="masuk" placeholder="YYYY" required>
-						</div>
-						<div class="form-group">
-							<label for="masuk">Tahun Lulus</label> <input type="text" class="form-control" id="lulus"
-								name="lulus" placeholder="YYYY" required>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer justify-content-between">
-					<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
-					<button class="btn btn-olive" id="btn-save-pendidikan-edit" type="button">Save</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
@@ -156,7 +106,7 @@
 	<!-- //         }); -->
 	<!--     </script> -->
 	<script>
-		idRow = -1;
+		var idRow = -1;
 		$('#submit').hide();
 		$('#btn-tambah-pendidikan').click(function () {
 			formPendidikan.resetForm();
@@ -164,16 +114,12 @@
 		});
 		var pendidikanForm = [];
 		$('#btn-save-pendidikan').click(function () {
-			//if (idRow == -1) {
+			if (idRow >= 0) {
+				formPendidikan.saveEditData();
+			} else {
 				formPendidikan.create();
 				$('#submit').show();
-			//}else{
-
-			//}
-
-		});
-		$('#btn-save-pendidikan-edit').click(function () {
-			formPendidikan.saveEditData();
+			}
 		});
 		$('#submit').click(function () {
 			formPendidikan.saveForm($('#idPerson').val(), pendidikanForm);

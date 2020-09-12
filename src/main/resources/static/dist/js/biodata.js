@@ -22,19 +22,19 @@ var tableBiodata = {
                             },
                             {
                                 title: "Nama",
-                                data: "name"
+                                data: "nama"
                             },
                             {
                                 title: "Alamat",
-                                data: "address"
+                                data: "alamat"
                             },
                             {
                                 title: "No Hp",
-                                data: "hp"
+                                data: "noHp"
                             },
                             {
                                 title: "Tanggal Lahir",
-                                data: "tgl"
+                                data: "tanggalLahir"
                             },
                             {
                                 title: "Tempat Lahir",
@@ -153,19 +153,19 @@ var tableBiodataByNik = {
                             },
                             {
                                 title: "Nama",
-                                data: "name"
+                                data: "nama"
                             },
                             {
                                 title: "Alamat",
-                                data: "address"
+                                data: "alamat"
                             },
                             {
                                 title: "No Hp",
-                                data: "hp"
+                                data: "noHp"
                             },
                             {
                                 title: "Tanggal Lahir",
-                                data: "tgl"
+                                data: "tanggalLahir"
                             },
                             {
                                 title: "Tempat Lahir",

@@ -5,6 +5,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,6 +38,8 @@ public class Controller {
 	private PendidikanRepository pendidikanRepository;
 	@Autowired
 	private DataService dataService;
+	@Autowired
+	private ModelMapper modelMapper;
 
 	private int umur(PersonBioDto data) {
 		LocalDate birthYear = data.getTanggalLahir().toLocalDate();
@@ -63,7 +66,10 @@ public class Controller {
 			statusDto.setStatus(false);
 			statusDto.setMessage("data gagal masuk, jumlah digit nik tidak sama dengan 16");
 		} else {
-			dataService.insertData(data);
+			Person person = modelMapper.map(data, Person.class);
+			Biodata biodata = modelMapper.map(data, Biodata.class);
+			biodata.setPerson(person);
+			dataService.insertData(biodata);
 			statusDto.setStatus(true);
 			statusDto.setMessage("data berhasil masuk");
 		}
@@ -90,17 +96,10 @@ public class Controller {
 		List<PersonBioDto> dataDtoList = new ArrayList<>();
 		List<Person> persons = personRepository.findAll();
 		for (Person person : persons) {
-			PersonBioDto dataDto1 = new PersonBioDto();
 			Biodata biodata = biodataRepository.findByPersonIdPerson(person.getIdPerson());
-			dataDto1.setIdBio(biodata.getIdBio());
-			dataDto1.setNoHp(biodata.getNoHp());
-			dataDto1.setTanggalLahir(biodata.getTanggalLahir());
-			dataDto1.setTempatLahir(biodata.getTempatLahir());
-			dataDto1.setNama(person.getNama());
-			dataDto1.setAlamat(person.getAlamat());
-			dataDto1.setIdPerson(person.getIdPerson());
-			dataDto1.setNik(person.getNik());
-			dataDtoList.add(dataDto1);
+			PersonBioDto dto = modelMapper.map(biodata, PersonBioDto.class);
+			modelMapper.map(biodata.getPerson(), dto);
+			dataDtoList.add(dto);
 		}
 		return dataDtoList;
 	}
@@ -109,7 +108,7 @@ public class Controller {
 	@GetMapping("/{nik}")
 	public List<Object> getByNik(@PathVariable String nik) {
 		List<Object> values = new ArrayList<>();
-		StatusWithDataDto status2 = new StatusWithDataDto();
+		StatusWithDataDto status = new StatusWithDataDto();
 		StatusDto statusDto = new StatusDto();
 		if (nik.length() == 16) {
 			if (personRepository.findByNik(nik).isEmpty() == false) {
@@ -118,10 +117,10 @@ public class Controller {
 				Biodata biodata = biodataRepository.findAllByPersonIdPerson(id);
 				PersonBioPendDto dataDto2 = convertToDto(person, biodata);
 				// set status message
-				status2.setStatus(true);
-				status2.setMessage("success");
-				status2.setData(dataDto2);
-				values.add(status2);
+				status.setStatus(true);
+				status.setMessage("success");
+				status.setData(dataDto2);
+				values.add(status);
 			} else {
 				statusDto.setStatus(false);
 				statusDto.setMessage("data dengan nik " + nik + " tidak ditemukan");
@@ -137,16 +136,9 @@ public class Controller {
 	}
 
 	private PersonBioPendDto convertToDto(Person person, Biodata biodata) {
-		PersonBioPendDto dataDto2 = new PersonBioPendDto();
+		PersonBioPendDto dto = modelMapper.map(person, PersonBioPendDto.class);
 		Integer id = person.getIdPerson();
-		dataDto2.setNik(person.getNik());
-		dataDto2.setNama(person.getNama());
-		dataDto2.setAlamat(person.getAlamat());
-		dataDto2.setNoHp(biodata.getNoHp());
-
-		// convert date to String
-		dataDto2.setTanggalLahir(biodata.getTanggalLahir());
-		dataDto2.setTempatLahir(biodata.getTempatLahir());
+		modelMapper.map(biodata, dto);
 
 		// set Umur
 		LocalDate birthYear = biodata.getTanggalLahir().toLocalDate();
@@ -154,23 +146,16 @@ public class Controller {
 		Period p = Period.between(birthYear, dateNow);
 		int umur = p.getYears();
 
-		dataDto2.setUmur(umur);
-		dataDto2.setPendidikanTerakhir(pendidikanRepository.cariPendidikanTerakhir(id));
-		return dataDto2;
+		dto.setUmur(umur);
+		dto.setPendidikanTerakhir(pendidikanRepository.cariPendidikanTerakhir(id));
+		return dto;
 	}
 
 	@GetMapping("/data/{idBio}")
 	public PersonBioDto getBio(@PathVariable Integer idBio) {
 		Biodata biodata = biodataRepository.findById(idBio).get();
-		PersonBioDto data = new PersonBioDto();
-		data.setIdBio(biodata.getIdBio());
-		data.setNoHp(biodata.getNoHp());
-		data.setTanggalLahir(biodata.getTanggalLahir());
-		data.setTempatLahir(biodata.getTempatLahir());
-		data.setAlamat(biodata.getPerson().getAlamat());
-		data.setNama(biodata.getPerson().getNama());
-		data.setNik(biodata.getPerson().getNik());
-		data.setIdPerson(biodata.getPerson().getIdPerson());
+		PersonBioDto data = modelMapper.map(biodata, PersonBioDto.class);
+		modelMapper.map(biodata.getPerson(), data);
 		return data;
 	}
 }

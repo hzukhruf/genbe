@@ -22,11 +22,11 @@ var formPendidikan = {
                 },
                 {
                     title: "Tahun Masuk",
-                    data: "masuk"
+                    data: "tahunMasuk"
                 },
                 {
                     title: "Tahun Lulus",
-                    data: "lulus"
+                    data: "tahunLulus"
                 },
                 {
                     title: "Action",
@@ -76,9 +76,9 @@ var formPendidikan = {
     },
 
     saveEditData: function () {
-        var editData = getJsonForm($("#form-pendidikan-edit").serializeArray(), true);
+        var editData = getJsonForm($("#form-pendidikan").serializeArray(), true);
         pendidikanForm[idRow] = editData;
-        $('#modal-pendidikan-edit').modal('hide')
+        $('#modal-pendidikan').modal('hide')
         if ($.fn.DataTable.isDataTable('#tablePendidikan')) {
             //table yg sudah dibentuk menjadi datatable harus d rebuild lagi untuk di instantiasi ulang
             $('#tablePendidikan').DataTable().clear();
@@ -97,11 +97,11 @@ var formPendidikan = {
                 },
                 {
                     title: "Tahun Masuk",
-                    data: "masuk"
+                    data: "tahunMasuk"
                 },
                 {
                     title: "Tahun Lulus",
-                    data: "lulus"
+                    data: "tahunLulus"
                 },
                 {
                     title: "Action",
@@ -116,8 +116,8 @@ var formPendidikan = {
 };
 var editPendidikan = {
     setEditData: function (idEdit) {
-        $('#form-pendidikan-edit').fromJSON(JSON.stringify(pendidikanForm[idEdit]));
-        $('#modal-pendidikan-edit').modal('show');
+        $('#form-pendidikan').fromJSON(JSON.stringify(pendidikanForm[idEdit]));
+        $('#modal-pendidikan').modal('show');
         idRow = idEdit;
     }
 }
