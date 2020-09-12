@@ -1,11 +1,7 @@
 package com.hzukhruf.genbe.controller.restApi;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -165,5 +161,19 @@ public class Controller {
 		dataDto2.setPendidikanTerakhir(pendidikanRepository.cariPendidikanTerakhir(id));
 		return dataDto2;
 	}
-
+	
+	@GetMapping("/data/{idBio}")
+	public DataDto1 getBio(@PathVariable Integer idBio) {
+		Biodata biodata = biodataRepository.findById(idBio).get();
+		DataDto1 data= new DataDto1();
+		data.setIdBio(biodata.getIdBio());
+		data.setHp(biodata.getNoHp());
+		data.setTgl(biodata.getTanggalLahir());
+		data.setTempatLahir(biodata.getTempatLahir());
+		data.setAddress(biodata.getPerson().getAlamat());
+		data.setName(biodata.getPerson().getNama());
+		data.setNik(biodata.getPerson().getNik());
+		data.setIdPerson(biodata.getPerson().getIdPerson());
+		return data;
+	}
 }

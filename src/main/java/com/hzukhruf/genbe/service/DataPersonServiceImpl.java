@@ -1,6 +1,5 @@
 package com.hzukhruf.genbe.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,22 +21,22 @@ public class DataPersonServiceImpl implements DataPersonService {
 	@Override
 	public DataDto1 insertData(DataDto1 data) {
 		Person person = convertToEntityPerson(data);
-		personRepository.save(person);
-		data.setIdPerson(person.getIdPerson());
+		person.setIdPerson(data.getIdPerson());
 		Biodata biodata = convertToEntityBiodata(data);
 		biodata.setPerson(person);
+		personRepository.save(person);
 		biodataRepository.save(biodata);
 		return data;
 	}
-	
-	private Person convertToEntityPerson(DataDto1 data){
+
+	private Person convertToEntityPerson(DataDto1 data) {
 		Person person = new Person();
 		person.setNik(data.getNik());
 		person.setNama(data.getName());
 		person.setAlamat(data.getAddress());
 		return person;
 	}
-	
+
 	private Biodata convertToEntityBiodata(DataDto1 data) {
 		Biodata biodata = new Biodata();
 		biodata.setIdBio(data.getIdBio());
@@ -46,6 +45,5 @@ public class DataPersonServiceImpl implements DataPersonService {
 		biodata.setTempatLahir(data.getTempatLahir());
 		return biodata;
 	}
-	
 
 }
