@@ -2,8 +2,11 @@ package com.hzukhruf.genbe.model.entity;
 
 import javax.persistence.*;
 
+import lombok.Data;
+
 
 @Entity
+@Data
 @Table(name="t_pendidikan")
 public class Pendidikan {
 	@Id
@@ -26,52 +29,4 @@ public class Pendidikan {
 	
 	@Column(name="tahun_lulus", nullable = false, length = 10)
 	private String tahunLulus;
-
-	public Integer getIdPendidikan() {
-		return idPendidikan;
-	}
-
-	public void setIdPendidikan(Integer idPendidikan) {
-		this.idPendidikan = idPendidikan;
-	}
-
-	public Person getPerson() {
-		return person;
-	}
-
-	public void setPerson(Person person) {
-		this.person = person;
-	}
-
-	public String getJenjang() {
-		return jenjang;
-	}
-
-	public void setJenjang(String jenjang) {
-		this.jenjang = jenjang;
-	}
-
-	public String getInstitusi() {
-		return institusi;
-	}
-
-	public void setInstitusi(String institusi) {
-		this.institusi = institusi;
-	}
-
-	public String getTahunMasuk() {
-		return tahunMasuk;
-	}
-
-	public void setTahunMasuk(String tahunMasuk) {
-		this.tahunMasuk = tahunMasuk;
-	}
-
-	public String getTahunLulus() {
-		return tahunLulus;
-	}
-
-	public void setTahunLulus(String tahunLulus) {
-		this.tahunLulus = tahunLulus;
-	}
 }
