@@ -1,44 +1,46 @@
 var idRow = 0;
-var formPendidikan = {    
+var formPendidikan = {
     create: function () {
-        var listPendidikan = getJsonForm($("#form-pendidikan").serializeArray(), true);
-        pendidikanForm.push(listPendidikan);
-        $('#modal-pendidikan').modal('hide')
-        if ($.fn.DataTable.isDataTable('#tablePendidikan')) {
-            //table yg sudah dibentuk menjadi datatable harus d rebuild lagi untuk di instantiasi ulang
-            $('#tablePendidikan').DataTable().clear();
-            $('#tablePendidikan').DataTable().destroy();
-        }
-        $('#tablePendidikan').DataTable({
-            data: pendidikanForm,
-            columns: [
-                {
-                    title: "Jenjang",
-                    data: "jenjang"
-                },
-                {
-                    title: "Institusi",
-                    data: "institusi"
-                },
-                {
-                    title: "Tahun Masuk",
-                    data: "tahunMasuk"
-                },
-                {
-                    title: "Tahun Lulus",
-                    data: "tahunLulus"
-                },
-                {
-                    title: "Action",
-                    data: null,
-                    render: function (data, type, full, meta) {
-                        //console.log(meta.row)
-                        return "<button class='btn btn-olive btn-sm' onclick=editPendidikan.setEditData('" + meta.row + "')>Edit</button>"
+        //if ($('#form-pendidikan').parsley().validate()) {
+            var listPendidikan = getJsonForm($("#form-pendidikan").serializeArray(), true);
+            pendidikanForm.push(listPendidikan);
+            $('#modal-pendidikan').modal('hide')
+            if ($.fn.DataTable.isDataTable('#tablePendidikan')) {
+                //table yg sudah dibentuk menjadi datatable harus d rebuild lagi untuk di instantiasi ulang
+                $('#tablePendidikan').DataTable().clear();
+                $('#tablePendidikan').DataTable().destroy();
+            }
+            $('#tablePendidikan').DataTable({
+                data: pendidikanForm,
+                columns: [
+                    {
+                        title: "Jenjang",
+                        data: "jenjang"
+                    },
+                    {
+                        title: "Institusi",
+                        data: "institusi"
+                    },
+                    {
+                        title: "Tahun Masuk",
+                        data: "tahunMasuk"
+                    },
+                    {
+                        title: "Tahun Lulus",
+                        data: "tahunLulus"
+                    },
+                    {
+                        title: "Action",
+                        data: null,
+                        render: function (data, type, full, meta) {
+                            //console.log(meta.row)
+                            return "<button class='btn btn-olive btn-sm' onclick=editPendidikan.setEditData('" + meta.row + "')>Edit</button>"
+                        }
                     }
-                }
-            ]
-        });
-        // console.log(pendidikanForm);
+                ]
+            });
+            // console.log(pendidikanForm);
+        //}
     },
     resetForm: function () {
         $('#form-pendidikan')[0].reset();
@@ -76,42 +78,44 @@ var formPendidikan = {
     },
 
     saveEditData: function () {
-        var editData = getJsonForm($("#form-pendidikan").serializeArray(), true);
-        pendidikanForm[idRow] = editData;
-        $('#modal-pendidikan').modal('hide')
-        if ($.fn.DataTable.isDataTable('#tablePendidikan')) {
-            //table yg sudah dibentuk menjadi datatable harus d rebuild lagi untuk di instantiasi ulang
-            $('#tablePendidikan').DataTable().clear();
-            $('#tablePendidikan').DataTable().destroy();
-        }
-        $('#tablePendidikan').DataTable({
-            data: pendidikanForm,
-            columns: [
-                {
-                    title: "Jenjang",
-                    data: "jenjang"
-                },
-                {
-                    title: "Institusi",
-                    data: "institusi"
-                },
-                {
-                    title: "Tahun Masuk",
-                    data: "tahunMasuk"
-                },
-                {
-                    title: "Tahun Lulus",
-                    data: "tahunLulus"
-                },
-                {
-                    title: "Action",
-                    data: null,
-                    render: function (data, type, full, meta) {
-                        return "<button class='btn btn-olive btn-sm' onclick=editPendidikan.setEditData('" + meta.row + "')>Edit</button>"
+        //if ($('#form-pendidikan').parsley().validate()) {
+            var editData = getJsonForm($("#form-pendidikan").serializeArray(), true);
+            pendidikanForm[idRow] = editData;
+            $('#modal-pendidikan').modal('hide')
+            if ($.fn.DataTable.isDataTable('#tablePendidikan')) {
+                //table yg sudah dibentuk menjadi datatable harus d rebuild lagi untuk di instantiasi ulang
+                $('#tablePendidikan').DataTable().clear();
+                $('#tablePendidikan').DataTable().destroy();
+            }
+            $('#tablePendidikan').DataTable({
+                data: pendidikanForm,
+                columns: [
+                    {
+                        title: "Jenjang",
+                        data: "jenjang"
+                    },
+                    {
+                        title: "Institusi",
+                        data: "institusi"
+                    },
+                    {
+                        title: "Tahun Masuk",
+                        data: "tahunMasuk"
+                    },
+                    {
+                        title: "Tahun Lulus",
+                        data: "tahunLulus"
+                    },
+                    {
+                        title: "Action",
+                        data: null,
+                        render: function (data, type, full, meta) {
+                            return "<button class='btn btn-olive btn-sm' onclick=editPendidikan.setEditData('" + meta.row + "')>Edit</button>"
+                        }
                     }
-                }
-            ]
-        });
+                ]
+            });
+        //}
     }
 };
 var editPendidikan = {

@@ -67,37 +67,38 @@ var formBiodata = {
         $('#form-biodata')[0].reset();
     },
     saveForm: function () {
-        var dataResult = getJsonForm($("#form-biodata").serializeArray(), true);
-        console.log(dataResult)
-        $.ajax({
-            url: '/dataPerson',
-            method: 'post',
-            contentType: 'application/json',
-            dataType: 'json',
-            data: JSON.stringify(dataResult),
-            success: function (result) {
-                console.log(result.status)
-                $('#modal-biodata').modal('hide')
-                if (result.status == true) {
-                    tableBiodata.create();
-                    Swal.fire(
-                        'Sukses!',
-                        result.message,
-                        'success'
-                    )
-                } else {
-                    Swal.fire(
-                        'Gagal!',
-                        result.message,
-                        'error'
-                    )
+       // if ($('#form-biodata').parsley().validate()) {
+            var dataResult = getJsonForm($("#form-biodata").serializeArray(), true);
+            console.log(dataResult)
+            $.ajax({
+                url: '/dataPerson',
+                method: 'post',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(dataResult),
+                success: function (result) {
+                    console.log(result.status)
+                    $('#modal-biodata').modal('hide')
+                    if (result.status == true) {
+                        tableBiodata.create();
+                        Swal.fire(
+                            'Sukses!',
+                            result.message,
+                            'success'
+                        )
+                    } else {
+                        Swal.fire(
+                            'Gagal!',
+                            result.message,
+                            'error'
+                        )
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
                 }
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
-
+            });
+       // }
     },
     setEditData: function (idBio) {
         formBiodata.resetForm();

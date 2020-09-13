@@ -50,12 +50,15 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id="form-pendidikan" role="form">
+					<form id="form-pendidikan" role="form" data-parsley-validate>
 						<input name="id" type="hidden" />
 						<div class="form-group">
-							<label align="center">Jenjang</label> <select class="form-control select2"
-								style="width: 100%;" id='jenjang' name="jenjang" required>
-								<option value="">Pilih salah satu</option>
+							<label>Jenjang</label>
+							<select class="form-control select2" style="width: 100%;" id='jenjang' name="jenjang"
+								required="" data-parsley-trigger="keyup"
+								data-parsley-required-message="Jenjang pendidikan wajib dipilih">
+								<option value="">Pilih salah satu
+								</option>
 								<option value="SD">SD</option>
 								<option value="SMP">SMP</option>
 								<option value="SMA">SMA</option>
@@ -67,16 +70,28 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="institusi">Institusi</label> <input type="text" class="form-control"
-								id="institusi" name="institusi" required>
+							<label for="institusi">Institusi</label>
+							<input type="text" class="form-control" id="institusi" name="institusi" required
+								data-parsley-trigger="keyup" data-parsley-required-message="Nama institusi wajib diisi">
 						</div>
 						<div class="form-group">
-							<label for="tahunMasuk">Tahun Masuk</label> <input type="text" class="form-control"
-								id="tahunMasuk" name="tahunMasuk" placeholder="YYYY" required>
+							<label for="tahunMasuk">Tahun Masuk</label>
+							<input type="text" class="form-control" id="tahunMasuk" name="tahunMasuk" placeholder="YYYY"
+								required="" data-parsley-minlength='4' data-parsley-maxlength="4"
+								data-parsley-trigger="keyup" data-parsley-required-message="Tahun masuk wajib diisi"
+								data-parsley-type="number"
+								data-parsley-type-message="Tahun masuk berupa angka sebanyak 4 digit"
+								data-parsley-minlength-message="Tahun masuk berupa angka sebanyak 4 digit"
+								data-parsley-maxlength-message="Tahun masuk berupa angka sebanyak 4 digit">
 						</div>
 						<div class="form-group">
 							<label for="tahunLulus">Tahun Lulus</label> <input type="text" class="form-control"
-								id="tahunLulus" name="tahunLulus" placeholder="YYYY" required>
+								id="tahunLulus" name="tahunLulus" placeholder="YYYY" data-parsley-minlength='4'
+								data-parsley-maxlength="4" required="" data-parsley-trigger="keyup"
+								data-parsley-required-message="Tahun lulus wajib diisi" data-parsley-type="number"
+								data-parsley-type-message="Tahun lulus berupa angka sebanyak 4 digit"
+								data-parsley-minlength-message="Tahun lulus berupa angka sebanyak 4 digit"
+								data-parsley-maxlength-message="Tahun lulus berupa angka sebanyak 4 digit">
 						</div>
 					</form>
 				</div>

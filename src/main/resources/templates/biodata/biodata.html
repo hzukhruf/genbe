@@ -41,34 +41,46 @@
 
 
                 <div class="modal-body">
-                    <form id="form-biodata" role="form">
+                    <form id="form-biodata" role="form" data-parsley-validate>
                         <input name="idBio" type="hidden" />
                         <input name="idPerson" type="hidden" />
                         <div class="form-group">
                             <label for="nik">NIK</label>
-                            <input type="text" class="form-control" id="nik" name="nik" required>
+                            <input type="text" class="form-control" id="nik" name="nik" required
+                                data-parsley-trigger="keyup" data-parsley-required-message="NIK wajib diisi"
+                                data-parsley-minlength='16' data-parsley-maxlength="16"
+                                data-parsley-minlength-message="Jumlah digit NIK harus sama dengan 16"
+                                data-parsley-maxlength-message="Jumlah digit NIK harus sama dengan 16"
+                                data-parsley-trigger="keyup">
                         </div>
                         <div class="form-group">
                             <label for="nama">Nama</label>
-                            <input type="text" class="form-control" id="nama" name="nama" required>
+                            <input type="text" class="form-control" id="nama" name="nama" required
+                                data-parsley-trigger="keyup" data-parsley-required-message="Nama wajib diisi">
                         </div>
                         <div class="form-group">
                             <label for="alamat">Alamat</label>
-                            <textarea type="text" rows="3" class="form-control" id="alamat" name="alamat"
-                                required></textarea>
+                            <textarea type="text" rows="3" class="form-control" id="alamat" name="alamat" required
+                                data-parsley-trigger="keyup"
+                                data-parsley-required-message="Alamat wajib diisi"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="noHp">No HP</label>
-                            <input type="text" class="form-control" id="nohp" name="noHp" required>
+                            <input type="text" class="form-control" id="nohp" name="noHp" required
+                                data-parsley-trigger="keyup" data-parsley-required-message="No Hp wajib diisi"
+                                data-parsley-type="number" data-parsley-type-message="No Hp wajib berupa angka">
                         </div>
                         <div class="form-group">
                             <label for="tanggalLahir">Tanggal Lahir</label>
-                            <input type="date" class="form-control" id="tanggalLahir" name="tanggalLahir" required>
+                            <input type="date" class="form-control" id="tanggalLahir" name="tanggalLahir" required
+                                data-parsley-trigger="keyup" data-parsley-required-message="Tanggal lahir wajib diisi"
+                                data-parsley-max='1990-09-13'>
 
                         </div>
                         <div class="form-group">
                             <label for="tempatLahir">Tempat Lahir</label>
-                            <input type="text" class="form-control" id="tempatLahir" name="tempatLahir" required>
+                            <input type="text" class="form-control" id="tempatLahir" name="tempatLahir" required
+                                data-parsley-trigger="keyup" data-parsley-required-message="Tempat lahir wajib diisi">
                         </div>
                     </form>
                 </div>
@@ -86,7 +98,7 @@
 <th:block layout:fragment="add-scripts">
     <script src="../../dist/js/biodata.js"></script>
     <script>
-        
+
     </script>
     <script>
         tableBiodata.create();
